@@ -1,6 +1,6 @@
 ✅ Array Utilities
 [Done] chunk(array, size) → Split array into groups of given size.
-compact(array) → Remove falsy values (false, 0, null, undefined, NaN, "").
+[Done] compact(array) → Remove falsy values (false, 0, null, undefined, NaN, "").
 flatten(array, deep?) → Flatten nested arrays (shallow/deep).
 uniq(array) → Return unique values.
 difference(array, values) → Elements in array not in values.
