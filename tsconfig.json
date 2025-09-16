@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2019", // Modern but still widely supported
+    "lib": ["ES2019", "DOM"], // Include DOM + modern ES features
+    "module": "ESNext", // For ESM builds
+    "moduleResolution": "Node", // Resolve like Node.js
+    "esModuleInterop": true, // Allow default import from CJS
+    "allowSyntheticDefaultImports": true,
+
+    /* Output */
+    "outDir": "dist", // Compiled files go here
+    "declaration": true, // Generate .d.ts files
+    "declarationMap": true, // Map .d.ts back to source
+    "sourceMap": true, // Useful for debugging
+
+    /* Strictness */
+    "strict": true, // Enable all strict checks
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+
+    /* Import/Export */
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
+  },
+  "include": ["src", "tests"], // Compile src and tests folders
+  "exclude": ["node_modules", "dist"]
+}
