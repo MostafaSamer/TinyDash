@@ -27,7 +27,10 @@ pnpm add @shockwavejs/tinydash
 ## Usage
 
 ```typescript
-import { chunk, compact, flatten, uniq, difference, intersection, groupBy } from '@shockwavejs/tinydash';
+import { 
+  chunk, compact, flatten, uniq, difference, intersection, groupBy,
+  deepClone, merge, get, set, omit, pick 
+} from '@shockwavejs/tinydash';
 
 // Chunk array into smaller arrays
 const numbers = [1, 2, 3, 4, 5];
@@ -64,6 +67,37 @@ const common = intersection(arrays);
 const numbers = [1, 2, 3, 4, 5, 6];
 const grouped = groupBy(numbers, (n) => n % 2 === 0 ? 'even' : 'odd');
 // Result: { odd: [1, 3, 5], even: [2, 4, 6] }
+
+// Deep clone objects
+const original = { a: 1, b: { c: 2 } };
+const cloned = deepClone(original);
+// Result: { a: 1, b: { c: 2 } } (independent copy)
+
+// Merge objects deeply
+const obj1 = { a: 1, b: { c: 2 } };
+const obj2 = { b: { d: 3 }, e: 4 };
+const merged = merge(obj1, obj2);
+// Result: { a: 1, b: { c: 2, d: 3 }, e: 4 }
+
+// Safe property access
+const data = { user: { profile: { name: 'John' } } };
+const name = get(data, 'user.profile.name', 'Unknown');
+// Result: 'John'
+
+// Set nested properties
+const obj = {};
+const result = set(obj, 'a.b.c', 1);
+// Result: { a: { b: { c: 1 } } }
+
+// Omit properties
+const user = { id: 1, name: 'John', email: 'john@example.com' };
+const publicUser = omit(user, ['email']);
+// Result: { id: 1, name: 'John' }
+
+// Pick specific properties
+const fullUser = { id: 1, name: 'John', email: 'john@example.com', password: 'secret' };
+const safeUser = pick(fullUser, ['id', 'name', 'email']);
+// Result: { id: 1, name: 'John', email: 'john@example.com' }
 ```
 
 ## API Reference
@@ -172,6 +206,98 @@ groupBy([1, 2, 3, 4, 5], (n) => n % 2 === 0 ? 'even' : 'odd')
 // { odd: [1, 3, 5], even: [2, 4] }
 ```
 
+### `deepClone<T>(obj: T): T`
+
+Creates a deep copy of an object, handling circular references.
+
+**Parameters:**
+- `obj` - The object to clone
+
+**Returns:** A deep copy of the object
+
+**Example:**
+```typescript
+deepClone({ a: 1, b: { c: 2 } }) // { a: 1, b: { c: 2 } }
+```
+
+### `merge<T, U>(obj1: T, obj2: U): T & U`
+
+Merges two objects deeply, with the second object taking precedence.
+
+**Parameters:**
+- `obj1` - The first object
+- `obj2` - The second object
+
+**Returns:** A new merged object
+
+**Example:**
+```typescript
+merge({ a: 1, b: { c: 2 } }, { b: { d: 3 } }) // { a: 1, b: { c: 2, d: 3 } }
+```
+
+### `get<T>(obj: any, path: string, defaultValue?: T): T | undefined`
+
+Safely accesses nested properties using dot notation.
+
+**Parameters:**
+- `obj` - The object to access
+- `path` - The dot-separated path
+- `defaultValue` - The default value if path doesn't exist
+
+**Returns:** The value at the path or default value
+
+**Example:**
+```typescript
+get({ a: { b: { c: 1 } } }, 'a.b.c') // 1
+get({ a: { b: { c: 1 } } }, 'a.b.d', 'default') // 'default'
+```
+
+### `set<T>(obj: any, path: string, value: T): any`
+
+Sets a value at a nested property using dot notation.
+
+**Parameters:**
+- `obj` - The object to modify
+- `path` - The dot-separated path
+- `value` - The value to set
+
+**Returns:** The modified object
+
+**Example:**
+```typescript
+set({}, 'a.b.c', 1) // { a: { b: { c: 1 } } }
+```
+
+### `omit<T, K>(obj: T, keys: K[]): Omit<T, K>`
+
+Returns a new object without the specified keys.
+
+**Parameters:**
+- `obj` - The object to omit keys from
+- `keys` - The keys to omit
+
+**Returns:** A new object without the specified keys
+
+**Example:**
+```typescript
+omit({ a: 1, b: 2, c: 3 }, ['a', 'c']) // { b: 2 }
+```
+
+### `pick<T, K>(obj: T, keys: K[]): Pick<T, K>`
+
+Returns a new object with only the specified keys.
+
+**Parameters:**
+- `obj` - The object to pick keys from
+- `keys` - The keys to pick
+
+**Returns:** A new object with only the specified keys
+
+**Example:**
+```typescript
+pick({ a: 1, b: 2, c: 3 }, ['a', 'c']) // { a: 1, c: 3 }
+```
+
 ## Development
 
 ### Prerequisites
@@ -214,6 +340,11 @@ MIT © [Mostafa Samir](https://github.com/MostafaSamer)
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Changelog
+
+### 1.1.0
+- Added object utility functions: deepClone, merge, get, set, omit, pick
+- Enhanced deepClone to handle circular references
+- Comprehensive test coverage for all object utilities
 
 ### 1.0.0
 - Initial release
