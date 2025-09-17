@@ -23,14 +23,14 @@
 [Done] reverse(str) → Reverse string characters.
 
 ✅ Number Utilities
-random(min, max) → Random integer in range.
-clamp(num, min, max) → Restrict number within bounds.
-sum(array) → Sum of numbers.
-average(array) → Mean of numbers.
+[Done] random(min, max) → Random integer in range.
+[Done] clamp(num, min, max) → Restrict number within bounds.
+[Done] sum(array) → Sum of numbers.
+[Done] average(array) → Mean of numbers.
 
 ✅ Validation Utilities
-isEmpty(value) → Check if object/array/string is empty.
-isEqual(a, b) → Deep comparison of two values.
-isEmail(str) → Validate email format.
-isUUID(str) → Validate UUID.
-isDate(value) → Check if value is valid date.
+[Done] isEmpty(value) → Check if object/array/string is empty.
+[Done] isEqual(a, b) → Deep comparison of two values.
+[Done] isEmail(str) → Validate email format.
+[Done] isUUID(str) → Validate UUID.
+[Done] isDate(value) → Check if value is valid date.

@@ -30,7 +30,9 @@ pnpm add @shockwavejs/tinydash
 import { 
   chunk, compact, flatten, uniq, difference, intersection, groupBy,
   deepClone, merge, get, set, omit, pick,
-  capitalize, camelCase, kebabCase, truncate, reverse
+  capitalize, camelCase, kebabCase, truncate, reverse,
+  random, clamp, sum, average,
+  isEmpty, isEqual, isEmail, isUUID, isDate
 } from '@shockwavejs/tinydash';
 
 // Chunk array into smaller arrays
@@ -119,6 +121,41 @@ const short = truncate('This is a very long string', 10);
 // Reverse strings
 const reversed = reverse('hello');
 // Result: 'olleh'
+
+// Generate random numbers
+const randomNum = random(1, 10);
+// Result: 7 (random number between 1 and 10)
+
+// Clamp numbers within bounds
+const clamped = clamp(15, 0, 10);
+// Result: 10
+
+// Calculate sum and average
+const numbers = [1, 2, 3, 4, 5];
+const total = sum(numbers);
+// Result: 15
+const mean = average(numbers);
+// Result: 3
+
+// Check if values are empty
+const empty = isEmpty('');
+// Result: true
+const notEmpty = isEmpty('hello');
+// Result: false
+
+// Deep equality comparison
+const equal = isEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } });
+// Result: true
+
+// Validate email and UUID
+const validEmail = isEmail('user@example.com');
+// Result: true
+const validUUID = isUUID('123e4567-e89b-12d3-a456-426614174000');
+// Result: true
+
+// Check if value is a valid date
+const validDate = isDate('2023-01-01');
+// Result: true
 ```
 
 ## API Reference
@@ -396,6 +433,149 @@ reverse('hello') // 'olleh'
 reverse('world') // 'dlrow'
 ```
 
+### `random(min: number, max: number): number`
+
+Generates a random integer between min and max (inclusive).
+
+**Parameters:**
+- `min` - The minimum value (inclusive)
+- `max` - The maximum value (inclusive)
+
+**Returns:** A random integer between min and max
+
+**Example:**
+```typescript
+random(1, 10) // 7 (random number between 1 and 10)
+random(0, 100) // 42 (random number between 0 and 100)
+```
+
+### `clamp(num: number, min: number, max: number): number`
+
+Clamps a number between min and max values.
+
+**Parameters:**
+- `num` - The number to clamp
+- `min` - The minimum value
+- `max` - The maximum value
+
+**Returns:** The clamped number
+
+**Example:**
+```typescript
+clamp(5, 0, 10) // 5
+clamp(-5, 0, 10) // 0
+clamp(15, 0, 10) // 10
+```
+
+### `sum(array: number[]): number`
+
+Calculates the sum of numbers in an array.
+
+**Parameters:**
+- `array` - The array of numbers to sum
+
+**Returns:** The sum of all numbers
+
+**Example:**
+```typescript
+sum([1, 2, 3, 4, 5]) // 15
+sum([1.5, 2.5, 3.5]) // 7.5
+```
+
+### `average(array: number[]): number`
+
+Calculates the average (mean) of numbers in an array.
+
+**Parameters:**
+- `array` - The array of numbers to average
+
+**Returns:** The average of all numbers
+
+**Example:**
+```typescript
+average([1, 2, 3, 4, 5]) // 3
+average([1.5, 2.5, 3.5]) // 2.5
+```
+
+### `isEmpty(value: any): boolean`
+
+Checks if a value is empty (null, undefined, empty string, empty array, or empty object).
+
+**Parameters:**
+- `value` - The value to check
+
+**Returns:** True if the value is empty, false otherwise
+
+**Example:**
+```typescript
+isEmpty('') // true
+isEmpty([]) // true
+isEmpty({}) // true
+isEmpty('hello') // false
+```
+
+### `isEqual(a: any, b: any): boolean`
+
+Performs deep equality comparison between two values.
+
+**Parameters:**
+- `a` - The first value to compare
+- `b` - The second value to compare
+
+**Returns:** True if values are deeply equal, false otherwise
+
+**Example:**
+```typescript
+isEqual({ a: 1, b: { c: 2 } }, { a: 1, b: { c: 2 } }) // true
+isEqual([1, 2, 3], [1, 2, 3]) // true
+```
+
+### `isEmail(str: string): boolean`
+
+Validates if a string is a valid email address.
+
+**Parameters:**
+- `str` - The string to validate
+
+**Returns:** True if the string is a valid email, false otherwise
+
+**Example:**
+```typescript
+isEmail('user@example.com') // true
+isEmail('invalid-email') // false
+```
+
+### `isUUID(str: string): boolean`
+
+Validates if a string is a valid UUID.
+
+**Parameters:**
+- `str` - The string to validate
+
+**Returns:** True if the string is a valid UUID, false otherwise
+
+**Example:**
+```typescript
+isUUID('123e4567-e89b-12d3-a456-426614174000') // true
+isUUID('invalid-uuid') // false
+```
+
+### `isDate(value: any): boolean`
+
+Checks if a value is a valid Date object or can be parsed as a date.
+
+**Parameters:**
+- `value` - The value to check
+
+**Returns:** True if the value is a valid date, false otherwise
+
+**Example:**
+```typescript
+isDate(new Date()) // true
+isDate('2023-01-01') // true
+isDate('invalid-date') // false
+```
+
 ## Development
 
 ### Prerequisites
@@ -438,6 +618,12 @@ MIT © [Mostafa Samir](https://github.com/MostafaSamer)
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Changelog
+
+### 1.3.0
+- Added number utility functions: random, clamp, sum, average
+- Added validation utility functions: isEmpty, isEqual, isEmail, isUUID, isDate
+- Comprehensive test coverage for all new utilities (164 total tests)
+- Enhanced number and validation capabilities
 
 ### 1.2.0
 - Added string utility functions: capitalize, camelCase, kebabCase, truncate, reverse
