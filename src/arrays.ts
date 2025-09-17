@@ -84,3 +84,41 @@ export function uniq<T>(array: T[]) {
 export function difference<T>(array: T[], values: T[]) {
     return array.filter(item => !values.includes(item));
 }
+
+
+/**
+ * Common values across arrays.
+ *
+ * @example
+ * intersection([[1, 2, 3], [2, 3, 4], [3, 4, 5]]) // [3]
+ *
+ * @param array The array to intersection
+ * @returns A new array of intersection values
+ */
+
+export function intersection<T>(arrays: T[][]) {
+    return arrays.reduce((acc, curr) => acc.filter(item => curr.includes(item)), arrays[0]);
+}
+
+
+/**
+ * Group items by function result or key.
+ *
+ * @example
+ * groupBy([1, 2, 3, 4, 5], (item) => item % 2) // { 0: [2, 4], 1: [1, 3, 5] }
+ *
+ * @param array The array to group by
+ * @param fn The function to group by
+ * @returns A new array of grouped values
+ */
+
+export function groupBy<T>(array: T[], fn: (item: T) => string) {
+    return array.reduce((acc: Record<string, T[]>, curr) => {
+        const key = fn(curr);
+        if (!acc[key]) {
+            acc[key] = [];
+        }
+        acc[key].push(curr);
+        return acc;
+    }, {});
+}

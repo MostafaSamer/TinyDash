@@ -4,8 +4,8 @@
 [Done] flatten(array, deep?) → Flatten nested arrays (shallow/deep).
 [Done] uniq(array) → Return unique values.
 [Done] difference(array, values) → Elements in array not in values.
-intersection(...arrays) → Common values across arrays.
-groupBy(array, fn | key) → Group items by function result or key.
+[Done] intersection(...arrays) → Common values across arrays.
+[Done] groupBy(array, fn | key) → Group items by function result or key.
 
 ✅ Object Utilities
 deepClone(obj) → Deep copy an object.

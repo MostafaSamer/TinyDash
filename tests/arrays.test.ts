@@ -1,4 +1,4 @@
-import { chunk, compact, difference, flatten, uniq } from '../src/arrays';
+import { chunk, compact, difference, flatten, groupBy, intersection, uniq } from '../src/arrays';
 
 describe('chunk', () => {
   test('should split array into chunks of specified size', () => {
@@ -102,3 +102,15 @@ describe('difference', () => {
     expect(difference([1, 2, 3], [2, 3])).toEqual([1]);
   });
 });
+
+describe('intersection', () => {
+  test('should return intersection values', () => {
+    expect(intersection([[1, 2, 3], [2, 3, 4], [3, 4, 5]])).toEqual([3]);
+  });
+});
+
+describe('groupBy', () => {
+  test('should return grouped values', () => {
+    expect(groupBy([1, 2, 3, 4, 5], (item) => item % 2 as unknown as string)).toEqual({ '0': [2, 4], '1': [1, 3, 5] });
+  });
+}); 
