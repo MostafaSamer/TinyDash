@@ -1,4 +1,4 @@
-import { chunk, compact } from '../src/arrays';
+import { chunk, compact, difference, flatten, uniq } from '../src/arrays';
 
 describe('chunk', () => {
   test('should split array into chunks of specified size', () => {
@@ -70,5 +70,35 @@ describe('compact', () => {
 
   test('should handle arrays with NaN', () => {
     expect(compact([1, NaN, 2, 3])).toEqual([1, 2, 3]);
+  });
+});
+
+describe('flatten', () => {
+  test('should flatten shallow array', () => {
+    expect(flatten([1, [2, [3, [4]]]])).toEqual([1, 2, [3, [4]]]);
+  });
+
+  test('should flatten deeply', () => {
+    expect(flatten([1, [2, [3, [4]]]], true)).toEqual([1, 2, 3, 4]);
+  });
+});
+
+describe('uniq', () => {
+  test('should return unique values', () => {
+    expect(uniq([1, 2, 3, 2, 1])).toEqual([1, 2, 3]);
+  });
+});
+
+describe('difference', () => {
+  test('should return difference values', () => {
+    expect(difference([1, 2, 3, 2, 1], [2, 3])).toEqual([1, 1]);
+  });
+
+  test('should handle empty array', () => {
+    expect(difference([], [2, 3])).toEqual([]);
+  });
+
+  test('should handle array with only difference values', () => {
+    expect(difference([1, 2, 3], [2, 3])).toEqual([1]);
   });
 });

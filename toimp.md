@@ -1,9 +1,9 @@
 ✅ Array Utilities
 [Done] chunk(array, size) → Split array into groups of given size.
 [Done] compact(array) → Remove falsy values (false, 0, null, undefined, NaN, "").
-flatten(array, deep?) → Flatten nested arrays (shallow/deep).
-uniq(array) → Return unique values.
-difference(array, values) → Elements in array not in values.
+[Done] flatten(array, deep?) → Flatten nested arrays (shallow/deep).
+[Done] uniq(array) → Return unique values.
+[Done] difference(array, values) → Elements in array not in values.
 intersection(...arrays) → Common values across arrays.
 groupBy(array, fn | key) → Group items by function result or key.
 
