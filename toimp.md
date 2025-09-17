@@ -8,19 +8,19 @@
 [Done] groupBy(array, fn | key) → Group items by function result or key.
 
 ✅ Object Utilities
-deepClone(obj) → Deep copy an object.
-merge(obj1, obj2) → Merge two objects (deep).
-get(obj, path, defaultValue) → Safe access nested properties.
-set(obj, path, value) → Set value at a nested property.
-omit(obj, keys) → Return new object without specific keys.
-pick(obj, keys) → Return object with only specific keys.
+[Done] deepClone(obj) → Deep copy an object.
+[Done] merge(obj1, obj2) → Merge two objects (deep).
+[Done] get(obj, path, defaultValue) → Safe access nested properties.
+[Done] set(obj, path, value) → Set value at a nested property.
+[Done] omit(obj, keys) → Return new object without specific keys.
+[Done] pick(obj, keys) → Return object with only specific keys.
 
 ✅ String Utilities
-capitalize(str) → Make first letter uppercase.
-camelCase(str) → Convert string to camelCase.
-kebabCase(str) → Convert string to kebab-case.
-truncate(str, length) → Cut string with ... if too long.
-reverse(str) → Reverse string characters.
+[Done] capitalize(str) → Make first letter uppercase.
+[Done] camelCase(str) → Convert string to camelCase.
+[Done] kebabCase(str) → Convert string to kebab-case.
+[Done] truncate(str, length) → Cut string with ... if too long.
+[Done] reverse(str) → Reverse string characters.
 
 ✅ Number Utilities
 random(min, max) → Random integer in range.

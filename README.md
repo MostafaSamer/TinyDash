@@ -29,7 +29,8 @@ pnpm add @shockwavejs/tinydash
 ```typescript
 import { 
   chunk, compact, flatten, uniq, difference, intersection, groupBy,
-  deepClone, merge, get, set, omit, pick 
+  deepClone, merge, get, set, omit, pick,
+  capitalize, camelCase, kebabCase, truncate, reverse
 } from '@shockwavejs/tinydash';
 
 // Chunk array into smaller arrays
@@ -98,6 +99,26 @@ const publicUser = omit(user, ['email']);
 const fullUser = { id: 1, name: 'John', email: 'john@example.com', password: 'secret' };
 const safeUser = pick(fullUser, ['id', 'name', 'email']);
 // Result: { id: 1, name: 'John', email: 'john@example.com' }
+
+// Capitalize strings
+const title = capitalize('hello world');
+// Result: 'Hello world'
+
+// Convert to camelCase
+const camel = camelCase('hello-world test');
+// Result: 'helloWorldTest'
+
+// Convert to kebab-case
+const kebab = kebabCase('helloWorld test');
+// Result: 'hello-world-test'
+
+// Truncate strings
+const short = truncate('This is a very long string', 10);
+// Result: 'This is a ...'
+
+// Reverse strings
+const reversed = reverse('hello');
+// Result: 'olleh'
 ```
 
 ## API Reference
@@ -298,6 +319,83 @@ Returns a new object with only the specified keys.
 pick({ a: 1, b: 2, c: 3 }, ['a', 'c']) // { a: 1, c: 3 }
 ```
 
+### `capitalize(str: string): string`
+
+Capitalizes the first letter of a string.
+
+**Parameters:**
+- `str` - The string to capitalize
+
+**Returns:** A new string with the first letter capitalized
+
+**Example:**
+```typescript
+capitalize('hello world') // 'Hello world'
+```
+
+### `camelCase(str: string): string`
+
+Converts a string to camelCase format.
+
+**Parameters:**
+- `str` - The string to convert
+
+**Returns:** A new string in camelCase format
+
+**Example:**
+```typescript
+camelCase('hello world') // 'helloWorld'
+camelCase('hello-world') // 'helloWorld'
+camelCase('hello_world') // 'helloWorld'
+```
+
+### `kebabCase(str: string): string`
+
+Converts a string to kebab-case format.
+
+**Parameters:**
+- `str` - The string to convert
+
+**Returns:** A new string in kebab-case format
+
+**Example:**
+```typescript
+kebabCase('hello world') // 'hello-world'
+kebabCase('helloWorld') // 'hello-world'
+kebabCase('hello_world') // 'hello-world'
+```
+
+### `truncate(str: string, length: number): string`
+
+Truncates a string to a specified length and adds ellipsis if needed.
+
+**Parameters:**
+- `str` - The string to truncate
+- `length` - The maximum length
+
+**Returns:** A new truncated string
+
+**Example:**
+```typescript
+truncate('Hello world', 5) // 'Hello...'
+truncate('Hello', 10) // 'Hello'
+```
+
+### `reverse(str: string): string`
+
+Reverses the characters in a string.
+
+**Parameters:**
+- `str` - The string to reverse
+
+**Returns:** A new reversed string
+
+**Example:**
+```typescript
+reverse('hello') // 'olleh'
+reverse('world') // 'dlrow'
+```
+
 ## Development
 
 ### Prerequisites
@@ -340,6 +438,11 @@ MIT © [Mostafa Samir](https://github.com/MostafaSamer)
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Changelog
+
+### 1.2.0
+- Added string utility functions: capitalize, camelCase, kebabCase, truncate, reverse
+- Comprehensive test coverage for all string utilities
+- Enhanced string manipulation capabilities
 
 ### 1.1.0
 - Added object utility functions: deepClone, merge, get, set, omit, pick
